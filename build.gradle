@@ -7,19 +7,16 @@
  */
 
 // Apply the java-library plugin to add support for Java Library
-
-ext{
-	VER_ACTIVITI = '6.0.0'
-	VER_SPRING_BOOT='2.0.4.RELEASE'
-}
-
 buildscript {
-	repositories {
-		maven { url 'https://repo.spring.io/libs-snapshot' }
+	ext {
+		VER_SPRING_BOOT = '2.0.4.RELEASE'
+		VER_ACTIVITI = '6.0.0'
 	}
-
+	repositories {
+		mavenCentral()
+	}
 	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE"
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${VER_SPRING_BOOT}")
 	}
 }
 apply plugin: 'java'
@@ -36,15 +33,13 @@ tasks.withType(JavaCompile) {
 tasks.withType(Test) {
    systemProperty "file.encoding", "UTF-8"
 }
+
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
-
-
-
 dependencies {
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     compile "org.springframework.boot:spring-boot-starter:${VER_SPRING_BOOT}"
